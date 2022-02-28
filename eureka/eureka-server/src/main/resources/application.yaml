@@ -4,6 +4,9 @@ server:
 spring:
   application:
     name: eureka-server
+  profiles:
+    active: prod
+
 eureka:
   instance:
     # 需要检查的 hosts 文件是否有绑定 127.0.0.1       localhost
