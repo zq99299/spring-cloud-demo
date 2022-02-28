@@ -1,0 +1,11 @@
+### GET 请求
+GET http://localhost:30000/sayHi
+
+### POST 请求
+POST http://localhost:30000/sayHi
+Content-Type: application/json
+
+{
+  "name": "张三",
+  "port": 200000
+}

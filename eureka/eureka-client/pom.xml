@@ -9,15 +9,22 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <packaging>jar</packaging>
-    <name>eureka-server</name>
-    <artifactId>eureka-server</artifactId>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
-        </dependency>
-    </dependencies>
+    <artifactId>eureka-client</artifactId>
+    <name>eureka-client</name>
+    <packaging>jar</packaging>
+
+   <dependencies>
+        <!--  eureka-client -->
+       <dependency>
+           <groupId>org.springframework.cloud</groupId>
+           <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+       </dependency>
+       <!--  spring-boot 写 controller -->
+       <dependency>
+           <groupId>org.springframework.boot</groupId>
+           <artifactId>spring-boot-starter-web</artifactId>
+       </dependency>
+   </dependencies>
 
 </project>
