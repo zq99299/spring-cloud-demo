@@ -11,6 +11,7 @@
     <modules>
         <module>eureka/eureka-server</module>
         <module>eureka/eureka-client</module>
+        <module>eureka/eureka-consumer</module>
     </modules>
 
     <!-- 管理依赖的 JAR 版本-->

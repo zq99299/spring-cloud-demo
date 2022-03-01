@@ -1,0 +1,14 @@
+server:
+  port: 31000
+
+spring:
+  application:
+    name: eureka-consumer
+
+eureka:
+  client:
+    # 服务注册中心地址
+    service-url:
+      defaultZone: http://localhost:20000/eureka
+
+
