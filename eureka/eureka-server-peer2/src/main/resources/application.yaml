@@ -1,0 +1,17 @@
+server:
+  port: 20000
+
+spring:
+  application:
+    name: eureka-server-peer2
+
+eureka:
+  instance:
+    hostname: peer2
+  client:
+#    register-with-eureka: true
+#    fetch-registry: true
+    service-url:
+      # 将自己注册到另一个服务注册中心上
+      defaultZone: http://peer1:20001/eureka
+
