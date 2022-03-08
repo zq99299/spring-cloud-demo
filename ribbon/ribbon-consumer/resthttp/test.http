@@ -1,0 +1,5 @@
+### GET 请求
+GET http://localhost:31000/hello
+
+### POST 请求
+POST http://localhost:31000/hello

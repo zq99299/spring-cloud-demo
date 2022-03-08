@@ -1,9 +1,12 @@
 server:
-  port: 30000
+  port: 31000
 
 spring:
   application:
-    name: eureka-client
+    name: ribbon-consumer
+  cloud:
+    loadbalancer:
+      enabled: false
 
 eureka:
   client:
