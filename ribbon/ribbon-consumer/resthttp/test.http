@@ -1,5 +1,11 @@
 ### GET 请求
 GET http://localhost:31000/hello
 
+### GET 请求
+GET http://localhost:31000/hello?aa=11
+
+### GET 请求
+GET http://localhost:31000/hello?aa=8900
+
 ### POST 请求
 POST http://localhost:31000/hello

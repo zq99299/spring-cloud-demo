@@ -13,7 +13,6 @@ import org.springframework.web.client.RestTemplate;
  * @date 2022/3/7 21:53
  */
 @Configuration
-@RibbonClient(name = "eureka-client", configuration = RandomRule.class)
 public class AppConfig {
     @Bean
     // 用于标记要配置为使用 LoadBalancerClient 的 RestTemplate 或 WebClient bean 的注解

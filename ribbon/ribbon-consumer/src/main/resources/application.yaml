@@ -16,6 +16,7 @@ eureka:
 
 eureka-client:
   ribbon:
-    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule
+    NFLoadBalancerRuleClassName: cn.mrcode.springcloud.rules.MyRule
 
 
