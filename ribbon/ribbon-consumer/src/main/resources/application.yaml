@@ -4,9 +4,6 @@ server:
 spring:
   application:
     name: ribbon-consumer
-  cloud:
-    loadbalancer:
-      enabled: false
 
 eureka:
   client:

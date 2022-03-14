@@ -10,10 +10,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>ribbon-consumer</artifactId>
+    <artifactId>feign-consumer</artifactId>
     <packaging>jar</packaging>
-    <name>ribbon-consumer</name>
-
+    <name>feign-consumer</name>
 
     <dependencies>
         <!--  eureka-client -->
@@ -21,21 +20,24 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
-        <!--  ribbon -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
-        </dependency>
 
         <!--  spring-boot 写 controller -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <!-- boot 下的一些健康检查、监控等功能的包 -->
+
+        <!--  feign -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+
+        <!-- boot 下的一些健康检查、监控、bus 等功能的包 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
     </dependencies>
+
 </project>
