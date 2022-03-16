@@ -1,0 +1,16 @@
+server:
+  port: 40001
+
+spring:
+  application:
+    name: feign-consumer-advanced
+  main:
+    allow-bean-definition-overriding: true
+
+eureka:
+  client:
+    # 服务注册中心地址
+    service-url:
+      defaultZone: http://localhost:20000/eureka
+
+
