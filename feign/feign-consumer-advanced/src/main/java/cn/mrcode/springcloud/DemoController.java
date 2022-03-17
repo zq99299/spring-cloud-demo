@@ -27,4 +27,9 @@ public class DemoController {
         friend.setName("feign-consumer-advanced");
         return iService.friend(friend);
     }
+
+    @PostMapping("/retry")
+    public String retry(int timeout) {
+        return iService.retry(timeout);
+    }
 }

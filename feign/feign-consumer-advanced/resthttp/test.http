@@ -3,3 +3,7 @@ GET http://localhost:40001/hello
 
 ### POST 请求
 POST http://localhost:40001/hello
+
+
+### 重试测试
+POST http://localhost:40001/retry?timeout=3

@@ -2,7 +2,10 @@ package cn.mrcode.springcloud;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author mrcode
@@ -24,5 +27,17 @@ public class DemoController implements IService {
         log.info("You are {}", friend.getName());
         friend.setPort(port);
         return friend;
+    }
+
+    @Override
+    public String retry(@RequestParam("timeout") int timeout) {
+        try {
+            TimeUnit.SECONDS.sleep(timeout);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        log.info("retry " + port);
+        return port;
     }
 }
