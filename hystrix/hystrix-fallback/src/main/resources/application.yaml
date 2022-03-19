@@ -37,7 +37,7 @@ hystrix:
           # 线程
           thread:
             # 超时毫秒
-            timeoutInMilliseconds: 2000
+            timeoutInMilliseconds: 1000
             # 超时以后终止线程
             interrupOnTimeout: true
             # 此属性指示 HystrixCommand.run() 发生取消时是否应中断执行。
@@ -45,6 +45,30 @@ hystrix:
       requestCache:
         # 默认是打开的
         enable: true
+
+
+      circuitBreaker:
+        # === 下面的参数不是特别重要的，是一些开关参数
+        # 开启熔断器，默认也是开启
+        enabled: true
+        # 强制开启熔断器
+        forceOpen: false
+        # 强制关闭熔断器
+        forceClosed: false
+
+        # === 影响到熔断器判定之类的重要参数
+        # 熔断的前提条件(请求数量)，在一定的时间窗口内，请求达到 n 个以后，才会进入熔断判断
+        requestVolumeThreshold: 5
+        # 超过百分之 50 的失败请求，则熔断开关开启
+        errorThresholdPercentage: 50
+        # 在 n 毫秒后，将熔断器状态变成 半开状态，一般会小于时间窗口
+        sleepWindowInMilliseconds: 15000
+      # === 影响到熔断器判定之类的重要参数
+      # metrics 就是统计指标
+      metrics:
+        rollingStats:
+          # 以  20 秒作为一个时间统计窗口
+          timeInMilliseconds: 20000
 
 # hystrix 的超时配置了，但是 feign 底层使用了 Ribbon 做重试，还有一些超时的操作
 # 他们的时间是会冲突的，将这里的重试干掉，并且将超时时间设置得大一些，否则 hystrix 的没超时，Ribbon 就超时了，就达不到测试 hystrix 的效果
