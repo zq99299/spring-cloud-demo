@@ -42,6 +42,9 @@ hystrix:
             interrupOnTimeout: true
             # 此属性指示 HystrixCommand.run() 发生取消时是否应中断执行。
             interruptOnCancel: true
+      requestCache:
+        # 默认是打开的
+        enable: true
 
 # hystrix 的超时配置了，但是 feign 底层使用了 Ribbon 做重试，还有一些超时的操作
 # 他们的时间是会冲突的，将这里的重试干掉，并且将超时时间设置得大一些，否则 hystrix 的没超时，Ribbon 就超时了，就达不到测试 hystrix 的效果

@@ -4,3 +4,7 @@ GET http://localhost:50000/fallback
 
 ### timeout 测试
 GET http://localhost:50000/timeout?timeout=1
+
+
+### requestCache 测试
+GET http://localhost:50000/request-cache?name=张三
