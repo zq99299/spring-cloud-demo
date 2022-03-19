@@ -1,5 +1,7 @@
 package cn.mrcode.springcloud;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import com.netflix.hystrix.strategy.concurrency.HystrixRequestContext;
 import lombok.Cleanup;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,4 +42,24 @@ public class DemoController {
         friend = requestService.requestCache(name);
         return friend;
     }
+
+
+    @GetMapping("/timeout2")
+    // 给这个 controller 方法也使用 hystrix 来隔离
+    @HystrixCommand(
+            // 掉异常之后，调用降级方法
+            fallbackMethod = "timeout2Fallback",
+            commandProperties = {
+                    // 配置超时时间为 3 秒
+                    @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "3000")
+            }
+    )
+    public String timeout2(int timeout) {
+        return myService.retry(timeout);
+    }
+
+    public String timeout2Fallback(int timeout) {
+        return "success";
+    }
+
 }
