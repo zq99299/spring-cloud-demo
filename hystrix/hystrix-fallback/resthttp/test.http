@@ -1,2 +1,6 @@
 ### 服务降级测试
 GET http://localhost:50000/fallback
+
+
+### timeout 测试
+GET http://localhost:50000/timeout?timeout=1

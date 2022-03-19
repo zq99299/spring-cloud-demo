@@ -35,6 +35,6 @@ public class Fallback implements MyService {
 
     @Override
     public String retry(int timeout) {
-        return null;
+        return "你迟到了！";
     }
 }

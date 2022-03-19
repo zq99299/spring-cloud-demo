@@ -19,4 +19,9 @@ public class DemoController {
     public String fallback() {
         return myService.error();
     }
+
+    @GetMapping("/timeout")
+    public String timeout(int timeout) {
+        return myService.retry(timeout);
+    }
 }
