@@ -1,0 +1,28 @@
+server:
+  port: 50000
+
+spring:
+  application:
+    name: hystrix-fallback
+  main:
+    # 由于 MyService extends IService，这里就会产生 2 个 @FeignClient ，会产生同名的 bean 定义，所以使用 MyService 的定义覆盖
+    allow-bean-definition-overriding: true
+
+eureka:
+  client:
+    # 服务注册中心地址
+    service-url:
+      defaultZone: http://localhost:20000/eureka
+
+
+feign:
+  hystrix:
+    # 开启 feign 的 hystrix 功能
+    enabled: true
+
+hystrix:
+  command:
+    default:
+      fallback:
+        # 是否开启服务降级
+        enabled: true

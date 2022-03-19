@@ -26,4 +26,12 @@ public interface IService {
      */
     @GetMapping("/retry")
     String retry(@RequestParam("timeout") int timeout);
+
+    /**
+     * 专门抛出异常，测试 hystrix
+     *
+     * @return
+     */
+    @GetMapping("/error")
+    String error();
 }

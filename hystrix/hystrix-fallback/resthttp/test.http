@@ -1,0 +1,2 @@
+### 服务降级测试
+GET http://localhost:50000/fallback
