@@ -1,0 +1,6 @@
+server:
+  port: 53000
+
+spring:
+  application:
+    name: hystrix-dashboard
