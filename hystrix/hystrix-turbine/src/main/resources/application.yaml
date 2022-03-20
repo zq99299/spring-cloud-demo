@@ -1,0 +1,26 @@
+server:
+  port: 52000
+
+spring:
+  application:
+    name: hystrix-turbine
+
+eureka:
+  client:
+    # 服务注册中心地址
+    service-url:
+      defaultZone: http://localhost:20000/eureka
+
+turbine:
+  # 指定要监控的服务名
+  app-config: hystrix-fallback
+  # 这里只有一个集群,使用默认的集群名称
+  cluster-name-expression: "'default'"
+  # 默认情况下与 host 来区分服务的，这里设置使用 host 和 端口号来识别
+  combine-host-port: true
+  # 没有这个配置了
+  # instanceUrlSuffix.default: actuator/hystrix.stream
+  aggregator:
+    # 聚合的集群配置，这里只有一个
+    cluster-config: default
+
