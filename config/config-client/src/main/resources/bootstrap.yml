@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    config:
+      # 直连配置中心
+      uri: http://localhost:60000
+      # 应用名称
+      name: config-consumer
+      # 环境
+      profile: dev
+      # 分支
+      label: main

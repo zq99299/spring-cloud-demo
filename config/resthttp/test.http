@@ -1,0 +1,8 @@
+### config-client:name
+GET http://localhost:61000/name
+
+### config-client:words
+GET http://localhost:61000/words
+
+### config-client:env
+GET http://localhost:61000/env

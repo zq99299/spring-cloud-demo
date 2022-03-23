@@ -1,0 +1,23 @@
+server:
+  port: 60000
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/zq99299/spring-cloud-demo-config.git
+          # 强制拉取：当本地文件和仓库文件不一致的时候，会导致冲突，拉取不下来
+          # 强制拉取会以仓库的为准
+          force-pull: true
+          # 跳过 SSL 验证，否则会报错：could not be stablished because of SSL problems
+          skip-ssl-validation: true
+          # 如果需要登录才能访问，可以配置下面这样的
+#          username:
+#          password:
+          # 如果不是放在根目录，可以配置在哪些目录中搜索匹配的文件
+#          search-paths:
+#            - dev
+#            - prod

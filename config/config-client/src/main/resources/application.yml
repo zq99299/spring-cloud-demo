@@ -1,0 +1,15 @@
+server:
+  port: 61000
+
+spring:
+  application:
+    name: config-client
+
+# 本地声明一个配置属性，不过值使用 github 上的配置文件中的属性值
+myWords: ${words}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
