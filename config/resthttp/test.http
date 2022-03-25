@@ -6,3 +6,19 @@ GET http://localhost:61000/words
 
 ### config-client:env
 GET http://localhost:61000/env
+
+### config-client: 动态刷新测试
+GET http://localhost:61000/refres/words
+
+### config-client: 访问刷新
+POST http://localhost:61000/actuator/refresh
+
+### config-server:
+GET http://localhost:60000/main/config-consumer-dev.json
+
+
+### config-client-eureka:name
+GET http://localhost:61001/name
+
+### config-client-eureka:words
+GET http://localhost:61001/words

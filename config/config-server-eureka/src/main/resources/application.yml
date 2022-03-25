@@ -1,0 +1,18 @@
+server:
+  port: 60001
+
+spring:
+  application:
+    name: config-server-eureka
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/zq99299/spring-cloud-demo-config.git
+          force-pull: true
+          skip-ssl-validation: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:20000/eureka

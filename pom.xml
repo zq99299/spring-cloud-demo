@@ -24,6 +24,8 @@
         <module>hystrix/hystrix-dashboard</module>
         <module>config/config-server</module>
         <module>config/config-client</module>
+        <module>config/config-server-eureka</module>
+        <module>config/config-client-eureka</module>
     </modules>
 
     <!-- 管理依赖的 JAR 版本-->
