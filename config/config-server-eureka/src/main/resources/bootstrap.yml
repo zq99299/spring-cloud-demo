@@ -1,0 +1,10 @@
+encrypt:
+  # 设置密匙
+  key: 123456
+
+spring:
+  cloud:
+    config:
+      server:
+        encrypt:
+          enabled: true

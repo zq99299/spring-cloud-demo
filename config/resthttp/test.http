@@ -22,3 +22,16 @@ GET http://localhost:61001/name
 
 ### config-client-eureka:words
 GET http://localhost:61001/words
+
+### 加密调用
+GET http://localhost:60001/encrypt/status
+
+### 加密调用
+POST http://localhost:60001/encrypt
+
+我是一个加密字符串
+
+### 解密调用
+POST http://localhost:60001/decrypt
+
+719f419d00dc00d4837897301c5c01e9036a65287f0d75dc2a2320ee8b596944a3f9cc3c97ca9e1df3d9babc61aed043
