@@ -3,3 +3,39 @@ GET http://localhost:65000/FEIGN-CLIENT/sayHi
 
 ### 从网关发起调用
 GET http://localhost:65000/feign-client/sayHi
+
+
+### 获取路由信息
+GET http://localhost:65000/actuator/gateway/routes
+
+### 创建路由信息
+POST http://localhost:65000/actuator/gateway/routes/dynamic
+Content-Type: application/json
+
+{
+  "predicates": [
+    {
+      "name": "Path",
+      "args": {
+        "pattern": "/feign-client2/**"
+      }
+    }
+  ],
+  "filters": [
+    {
+      "name": "RewritePath",
+      "args": {
+        "regexp": "/feign-client2/(?<remaining>.*)",
+        "replacement": "/${remaining}"
+      }
+    }
+  ],
+  "uri": "lb://FEIGN-CLIENT",
+  "order": 0
+}
+
+### 测试动态路由添加的信息
+GET http://localhost:65000/feign-client2/sayHi
+
+### 删除路由信息
+DELETE http://localhost:65000/actuator/gateway/routes/dynamic
