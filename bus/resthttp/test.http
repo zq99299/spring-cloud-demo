@@ -12,3 +12,7 @@ POST http://localhost:60002/actuator/bus-refresh
 
 ### 只刷新指定服务
 POST http://localhost:61002/actuator/bus-refresh/client2
+
+
+### 远程事件
+POST http://localhost:60002/bus/publish/myevent
