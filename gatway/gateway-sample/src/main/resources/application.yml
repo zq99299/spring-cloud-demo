@@ -1,0 +1,23 @@
+server:
+  port: 65000
+
+spring:
+  application:
+    name: gateway-sample
+  cloud:
+    # gateway 配置
+    gateway:
+      discovery:
+        # 定位器: 自动创建路由规则
+        locator:
+          enabled: true
+          # 将 eureka 上获取的服务名转成小写
+          lower-case-service-id: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
