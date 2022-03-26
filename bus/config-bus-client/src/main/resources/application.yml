@@ -1,0 +1,25 @@
+server:
+  port: 61002
+
+spring:
+  application:
+    name: config-bus-client
+  # 指定 MQ 源
+  rabbitmq:
+
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+
+# 本地声明一个配置属性，不过值使用 github 上的配置文件中的属性值
+myWords: ${words}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always

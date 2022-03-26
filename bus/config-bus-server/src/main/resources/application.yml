@@ -1,0 +1,26 @@
+server:
+  port: 60002
+
+spring:
+  application:
+    name: config-bus-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/zq99299/spring-cloud-demo-config.git
+          force-pull: true
+          skip-ssl-validation: true
+  # 指定 MQ 源
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+
+# actuator 端点暴露
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

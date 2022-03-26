@@ -1,0 +1,20 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:20000/eureka
+
+spring:
+  cloud:
+    stream:
+      default-binder: rabbit
+    config:
+      discovery:
+        # 打开服务发现功能
+        enabled: true
+        service-id: config-bus-server
+      # 应用名称
+      name: config-consumer
+      # 环境
+      profile: dev
+      # 分支
+      label: main

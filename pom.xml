@@ -26,6 +26,8 @@
         <module>config/config-client</module>
         <module>config/config-server-eureka</module>
         <module>config/config-client-eureka</module>
+        <module>bus/config-bus-server</module>
+        <module>bus/config-bus-client</module>
     </modules>
 
     <!-- 管理依赖的 JAR 版本-->

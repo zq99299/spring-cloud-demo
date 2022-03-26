@@ -1,0 +1,14 @@
+### config-bus-client2:words
+GET http://localhost:61002/refres/words
+
+### config-bus-client2:words
+GET http://localhost:61003/refres/words
+
+### config-bus-server
+GET http://localhost:60002/main/config-consumer-dev.json
+
+### config-bus-server 批量刷新
+POST http://localhost:60002/actuator/bus-refresh
+
+### 只刷新指定服务
+POST http://localhost:61002/actuator/bus-refresh/client2
