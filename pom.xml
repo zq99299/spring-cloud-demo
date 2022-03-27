@@ -29,6 +29,8 @@
         <module>bus/config-bus-server</module>
         <module>bus/config-bus-client</module>
         <module>gatway/gateway-sample</module>
+        <module>gateway/auth-service-api</module>
+        <module>gateway/auth-service</module>
     </modules>
 
     <!-- 管理依赖的 JAR 版本-->

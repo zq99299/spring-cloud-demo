@@ -1,0 +1,26 @@
+### 登录
+POST http://localhost:65100/login
+Content-Type: application/x-www-form-urlencoded
+
+username=me&password=123456
+
+
+### 验证 token
+GET http://localhost:65100/verify?username=me&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJtcmNvZGUiLCJleHAiOjE2NDgzODM2MDgsImlhdCI6MTY0ODM4MzAwOCwidXNlcm5hbWUiOiJtZSJ9.aLT6X0briLBs1mt-ar0Dnbc6XypiH3aFHIWGCWKCSXg
+
+### 刷新 token
+POST http://localhost:65100/refresh
+Content-Type: application/x-www-form-urlencoded
+
+refreshToken=d8658ed3-5620-42d0-b905-949ec74a1418
+
+
+### 网关鉴权测试
+GET http://localhost:65000/java/sayHi
+name: xx
+
+### 网关鉴权测试
+GET http://localhost:65000/java/sayHi
+name: xx
+Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJtcmNvZGUiLCJleHAiOjE2NDgzODY1NzAsImlhdCI6MTY0ODM4NTk3MCwidXNlcm5hbWUiOiJtZSJ9.sTBld6b5GXX9EK-MZf8nz_m-6EGulbWIwCT7dMWl5I4
+mrcode-username: me
