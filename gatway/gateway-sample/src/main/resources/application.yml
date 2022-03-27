@@ -13,6 +13,23 @@ spring:
           enabled: true
           # 将 eureka 上获取的服务名转成小写
           lower-case-service-id: true
+      # RouteDefinition 中的属性
+      # 路由规则
+      routes:
+        - id: feignClientWithYml
+          # 均衡负载转发到 feign-client
+          uri: lb://FEIGN-CLIENT
+          # PredicateDefinition 中的属性
+          # 断言规则
+          predicates:
+            # 匹配路径为 /yml 开头的 uil
+            - Path=/yml/**
+          # FilterDefinition
+          # 过滤器
+          filters:
+            # StripPrefix：将匹配的路径端去掉，比如 /yml/** ， 会将 /yml 去掉后再转发
+            - StripPrefix=1
+
 management:
   endpoints:
     web:

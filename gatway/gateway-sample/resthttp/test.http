@@ -39,3 +39,11 @@ GET http://localhost:65000/feign-client2/sayHi
 
 ### 删除路由信息
 DELETE http://localhost:65000/actuator/gateway/routes/dynamic
+
+
+### 从网关发起调用：yml 配置
+GET http://localhost:65000/yml/sayHi
+
+### 从网关发起调用：java 配置
+GET http://localhost:65000/java/sayHi
+name: xx
