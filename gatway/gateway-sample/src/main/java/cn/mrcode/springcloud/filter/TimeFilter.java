@@ -15,7 +15,6 @@ import reactor.core.publisher.Mono;
  * @date 2022/3/27 14:22
  */
 @Slf4j
-@Component
 public class TimeFilter implements GlobalFilter, Ordered {
 
     @Override
