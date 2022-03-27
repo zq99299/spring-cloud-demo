@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 
+import java.time.ZonedDateTime;
+
 /**
  * @author mrcode
  * @date 2022/3/27 10:23
@@ -43,6 +45,13 @@ public class GatewayConfiguration {
                                         .addResponseHeader("java-param", "gateway-config")
                                 )
                                 .uri("lb://FEIGN-CLIENT")
+                )
+                .route(p -> p.path("/seckill/**")
+                        .and().after(ZonedDateTime.now().plusMinutes(1))  // 一分钟后才能访问该路由地址
+                        // .and().before()  // 在 n 时间之前有效
+                        // .and().between() // 在这个时间范围内才有效
+                        .filters(f -> f.stripPrefix(1))
+                        .uri("lb://FEIGN-CLIENT")
                 )
                 .build();
     }

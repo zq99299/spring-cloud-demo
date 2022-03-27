@@ -47,3 +47,14 @@ GET http://localhost:65000/yml/sayHi
 ### 从网关发起调用：java 配置
 GET http://localhost:65000/java/sayHi
 name: xx
+
+
+### =======  模拟秒杀业务
+### 获取一个商品详情
+GET http://localhost:65000/feign-client/gateway/details?pid=1
+
+### 下单
+POST http://localhost:65000/feign-client/gateway/placeOrder?pid=1
+
+### 秒杀下单
+POST http://localhost:65000/seckill/gateway/placeOrder?pid=1
