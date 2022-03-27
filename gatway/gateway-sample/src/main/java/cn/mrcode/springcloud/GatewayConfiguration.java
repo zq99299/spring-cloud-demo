@@ -1,5 +1,6 @@
 package cn.mrcode.springcloud;
 
+import cn.mrcode.springcloud.filter.TimeFilter;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +16,12 @@ import java.time.ZonedDateTime;
  */
 @Configuration
 public class GatewayConfiguration {
+
+    @Bean
+    public TimeFilter timeFilter() {
+        return new TimeFilter();
+    }
+
     /**
      * 定义路由定位器
      *
@@ -38,11 +45,11 @@ public class GatewayConfiguration {
                                 .and()
                                 // 请求头 header 中必须包含 name key
                                 .header("name")
-
                                 // 过滤器
                                 .filters(f -> f.stripPrefix(1)
                                         // 给响应头添加一个 header
                                         .addResponseHeader("java-param", "gateway-config")
+                                        //.filter(this.timeFilter())  // 添加自定义的 filter
                                 )
                                 .uri("lb://FEIGN-CLIENT")
                 )
@@ -51,6 +58,10 @@ public class GatewayConfiguration {
                         // .and().before()  // 在 n 时间之前有效
                         // .and().between() // 在这个时间范围内才有效
                         .filters(f -> f.stripPrefix(1))
+                        .uri("lb://FEIGN-CLIENT")
+                )
+                .route(p -> p.path("/xx/**")
+                        .filters(f -> f.redirect("302", "http://www.baidu.com"))
                         .uri("lb://FEIGN-CLIENT")
                 )
                 .build();
