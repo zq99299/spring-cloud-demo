@@ -29,6 +29,15 @@ spring:
           filters:
             # StripPrefix：将匹配的路径端去掉，比如 /yml/** ， 会将 /yml 去掉后再转发
             - StripPrefix=1
+            - name: RequestRateLimiter
+              args:
+                key-resolver: '#{@remoteAddrKeyResolver}'
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 2
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
 
 management:
   endpoints:

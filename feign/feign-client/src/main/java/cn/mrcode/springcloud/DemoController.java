@@ -44,6 +44,11 @@ public class DemoController implements IService {
 
     @Override
     public String error() {
-        throw  new RuntimeException("black sheep");
+        throw new RuntimeException("black sheep");
+    }
+
+    @GetMapping("/error2")
+    public String error2() {
+        throw new RuntimeException("black sheep");
     }
 }

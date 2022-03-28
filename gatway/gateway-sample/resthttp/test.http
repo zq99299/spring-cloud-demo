@@ -63,3 +63,10 @@ POST http://localhost:65000/seckill/gateway/placeOrder?pid=1
 ### 自定义过滤器测试
 GET http://localhost:65000/java/sayHi
 name: xx
+
+### 异常过滤器测试
+GET http://localhost:65000/java/error2
+name: xx
+
+### 限流测试
+GET http://localhost:65000/yml/sayHi

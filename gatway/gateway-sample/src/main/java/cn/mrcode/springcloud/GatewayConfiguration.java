@@ -3,12 +3,14 @@ package cn.mrcode.springcloud;
 import cn.mrcode.springcloud.filter.AuthFilter;
 import cn.mrcode.springcloud.filter.TimeFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.gateway.filter.ratelimit.KeyResolver;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
+import reactor.core.publisher.Mono;
 
 import java.time.ZonedDateTime;
 
@@ -29,6 +31,20 @@ public class GatewayConfiguration {
         return new AuthFilter();
     }
 
+    @Bean
+    public ErrorFilter errorFilter() {
+        return new ErrorFilter();
+    }
+
+    /**
+     * 创建限流的 key
+     * @return
+     */
+    @Bean
+    public KeyResolver remoteAddrKeyResolver() {
+        return exchange -> Mono.just(
+                exchange.getRequest().getRemoteAddress().getHostName());
+    }
 
     /**
      * 定义路由定位器
@@ -55,10 +71,11 @@ public class GatewayConfiguration {
                                 .header("name")
                                 // 过滤器
                                 .filters(f -> f.stripPrefix(1)
-                                        // 给响应头添加一个 header
-                                        .addResponseHeader("java-param", "gateway-config")
-                                        //.filter(this.timeFilter())  // 添加自定义的 filter
-                                        .filter(this.authFilter())
+                                                // 给响应头添加一个 header
+                                                .addResponseHeader("java-param", "gateway-config")
+                                                //.filter(this.timeFilter())  // 添加自定义的 filter
+//                                        .filter(this.authFilter())
+                                                .filter(this.errorFilter())
                                 )
                                 .uri("lb://FEIGN-CLIENT")
                 )
