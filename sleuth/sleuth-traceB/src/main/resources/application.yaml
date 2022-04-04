@@ -1,0 +1,17 @@
+server:
+  port: 62001
+
+spring:
+  application:
+    name: sleuth-traceB
+  sleuth:
+    # 采样率为 1，则是所有都请求
+    sampler:
+      probability: 1
+
+eureka:
+  client:
+    # 服务注册中心地址
+    service-url:
+      defaultZone: http://localhost:20000/eureka
+

@@ -1,0 +1,20 @@
+server:
+  port: 62000
+
+spring:
+  application:
+    name: sleuth-traceA
+  sleuth:
+    # 采样率为 1，则是所有都请求
+    sampler:
+      probability: 1
+
+# %clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID :- }){洋红色} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint } %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}
+
+
+eureka:
+  client:
+    # 服务注册中心地址
+    service-url:
+      defaultZone: http://localhost:20000/eureka
+

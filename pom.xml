@@ -31,6 +31,8 @@
         <module>gatway/gateway-sample</module>
         <module>gateway/auth-service-api</module>
         <module>gateway/auth-service</module>
+        <module>sleuth/sleuth-traceA</module>
+        <module>sleuth/sleuth-traceB</module>
     </modules>
 
     <!-- 管理依赖的 JAR 版本-->
