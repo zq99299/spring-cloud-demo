@@ -8,6 +8,9 @@ spring:
     # 采样率为 1，则是所有都请求
     sampler:
       probability: 1
+  zipkin:
+    # 建议使用域名或则 dns 配置
+    base-url: http://localhost:62100
 
 eureka:
   client:
