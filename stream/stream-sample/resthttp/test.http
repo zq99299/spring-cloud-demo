@@ -1,0 +1,2 @@
+### 生产者消息发送
+POST http://localhost:63000/send?body=Hellp Broadcast

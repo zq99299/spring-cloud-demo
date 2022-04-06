@@ -10,7 +10,15 @@ spring:
     port: 5672
     username: guest
     password: guest
-
+  cloud:
+    stream:
+      bindings:
+        # 这里指定的是 channel 的名称
+        myTopic-consumer:
+          # 绑定到物理的 Exchange 名称
+          destination: broadcast
+        myTopic-producer:
+          destination: broadcast
 
 management:
   endpoints:
