@@ -12,6 +12,12 @@ spring:
     password: guest
   cloud:
     stream:
+      # 这里是全局配置，也可以按 channel 配置，比如 spring.cloud.stream.bindings.foo.consumer.instance-count
+      # 当前消费者实例总数
+      instance-count: 2
+      # 这里是全局配置，也可以按 channel 配置，比如 spring.cloud.stream.bindings.foo.consumer.instance-index
+      # 当前实例的索引号，最大值为 instance-count - 1
+      instance-index: 0
       bindings:
         # 这里指定的是 channel 的名称
         myTopic-consumer:
@@ -40,12 +46,19 @@ spring:
             # partitionKeyExpression: "1"
             partitionKeyExpression: payload
 
-      # 这里是全局配置，也可以按 channel 配置，比如 spring.cloud.stream.bindings.foo.consumer.instance-count
-      # 当前消费者实例总数
-      instance-count: 2
-      # 这里是全局配置，也可以按 channel 配置，比如 spring.cloud.stream.bindings.foo.consumer.instance-index
-      # 当前实例的索引号，最大值为 instance-count - 1
-      instance-index: 0
+        #### 延迟实例
+        delayed-consumer:
+          destination: delayed-topic
+        delayed-producer:
+          destination: delayed-topic
+      # 针对 rabbit 进行配置
+      rabbit:
+        bindings:
+          # 这里将 delayed-producer 通道进行配置
+          delayed-producer:
+            producer:
+              # 是否应该使用延迟消息交换器
+              delayedExchange: true
 
 
 management:

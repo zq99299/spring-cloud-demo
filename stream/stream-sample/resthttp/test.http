@@ -10,3 +10,7 @@ POST http://localhost:63000/send-to-group?body=Hellp Broadcast
 POST http://localhost:63000/send-to-group?body=1111
 ### 生产者消息发送 - 分区
 POST http://localhost:63000/send-to-group?body=1
+
+
+### 生产者消息发送 - 延迟消息
+POST http://localhost:63000/send-to-delayed?body=1234580看&seconds=5

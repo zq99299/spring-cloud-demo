@@ -1,5 +1,6 @@
 package cn.mrcode.springcloud.biz;
 
+import cn.mrcode.springcloud.topic.DelayedTopic;
 import cn.mrcode.springcloud.topic.GroupTopic;
 import cn.mrcode.springcloud.topic.MyTopic;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +17,8 @@ import org.springframework.cloud.stream.messaging.Sink;
 @EnableBinding(value = {
         Sink.class,
         MyTopic.class,
-        GroupTopic.class
+        GroupTopic.class,
+        DelayedTopic.class
 })
 public class StreamConsumer {
     // 监听信道
@@ -32,6 +34,11 @@ public class StreamConsumer {
 
     @StreamListener(GroupTopic.INPUT)
     public void consumeGroupMessage(Object payload) {
+        log.info("payload : {}", payload);
+    }
+
+    @StreamListener(DelayedTopic.INPUT)
+    public void consumeDelayedMessage(MessageBean payload) {
         log.info("payload : {}", payload);
     }
 }
