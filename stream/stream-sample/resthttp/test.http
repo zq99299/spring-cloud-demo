@@ -1,2 +1,12 @@
 ### 生产者消息发送
 POST http://localhost:63000/send?body=Hellp Broadcast
+
+
+### 生产者消息发送 - 分组消息
+POST http://localhost:63000/send-to-group?body=Hellp Broadcast
+
+
+### 生产者消息发送 - 分区
+POST http://localhost:63000/send-to-group?body=1111
+### 生产者消息发送 - 分区
+POST http://localhost:63000/send-to-group?body=1

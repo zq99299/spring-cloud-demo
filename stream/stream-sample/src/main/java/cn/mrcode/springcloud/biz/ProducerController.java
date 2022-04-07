@@ -1,5 +1,6 @@
 package cn.mrcode.springcloud.biz;
 
+import cn.mrcode.springcloud.topic.GroupTopic;
 import cn.mrcode.springcloud.topic.MyTopic;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +22,13 @@ public class ProducerController {
     @PostMapping("/send")
     public void sendMessage(@RequestParam("body") String body) {
         myTopic.output().send(MessageBuilder.withPayload(body).build());
+    }
+
+    @Autowired
+    private GroupTopic groupTopic;
+
+    @PostMapping("/send-to-group")
+    public void sendMessageToGroup(@RequestParam("body") String body) {
+        groupTopic.output().send(MessageBuilder.withPayload(body).build());
     }
 }

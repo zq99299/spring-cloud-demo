@@ -20,6 +20,34 @@ spring:
         myTopic-producer:
           destination: broadcast
 
+        #### 消息分组示例
+        group-consumer:
+          destination: group-topic
+          # 分组是对消费者来说的，因为需要消费者处理消息
+          group: groupA
+          # 分区功能也是针对于消费者
+          consumer:
+            # 消费者是否从分区生产者接收数据
+            partitioned: true
+        group-producer:
+          destination: group-topic
+          # 生产者消费分区配置
+          producer:
+            # 分区数量
+            partitionCount: 2
+            # key 表达式，Key resolver; 表达式可以使用 SpEL 表达式
+            # 只有索引参数为 1 的节点（消费者）才能消费消息
+            # partitionKeyExpression: "1"
+            partitionKeyExpression: payload
+
+      # 这里是全局配置，也可以按 channel 配置，比如 spring.cloud.stream.bindings.foo.consumer.instance-count
+      # 当前消费者实例总数
+      instance-count: 2
+      # 这里是全局配置，也可以按 channel 配置，比如 spring.cloud.stream.bindings.foo.consumer.instance-index
+      # 当前实例的索引号，最大值为 instance-count - 1
+      instance-index: 0
+
+
 management:
   endpoints:
     web:
