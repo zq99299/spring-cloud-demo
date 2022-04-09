@@ -1,9 +1,6 @@
 package cn.mrcode.springcloud.biz;
 
-import cn.mrcode.springcloud.topic.DelayedTopic;
-import cn.mrcode.springcloud.topic.ErrorTopic;
-import cn.mrcode.springcloud.topic.GroupTopic;
-import cn.mrcode.springcloud.topic.MyTopic;
+import cn.mrcode.springcloud.topic.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.support.MessageBuilder;
@@ -67,6 +64,19 @@ public class ProducerController {
         MessageBean messageBean = new MessageBean();
         messageBean.setPayload(body);
         errorTopic.output()
+                .send(MessageBuilder.withPayload(messageBean).build());
+    }
+
+    @Autowired
+    private RequeueTopic requeueTopic;
+
+    // 异常重试（重回队列）
+    @PostMapping("/send-to-requeue")
+    public void sendMessageTorequeue(
+            @RequestParam("body") String body) {
+        MessageBean messageBean = new MessageBean();
+        messageBean.setPayload(body);
+        requeueTopic.output()
                 .send(MessageBuilder.withPayload(messageBean).build());
     }
 }

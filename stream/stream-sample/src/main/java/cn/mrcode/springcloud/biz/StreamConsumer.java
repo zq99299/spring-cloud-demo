@@ -1,14 +1,12 @@
 package cn.mrcode.springcloud.biz;
 
-import cn.mrcode.springcloud.topic.DelayedTopic;
-import cn.mrcode.springcloud.topic.ErrorTopic;
-import cn.mrcode.springcloud.topic.GroupTopic;
-import cn.mrcode.springcloud.topic.MyTopic;
+import cn.mrcode.springcloud.topic.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.cloud.stream.messaging.Sink;
 
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -22,7 +20,8 @@ import java.util.concurrent.atomic.AtomicInteger;
         MyTopic.class,
         GroupTopic.class,
         DelayedTopic.class,
-        ErrorTopic.class
+        ErrorTopic.class,
+        RequeueTopic.class,
 })
 public class StreamConsumer {
     // 监听信道
@@ -60,5 +59,14 @@ public class StreamConsumer {
             log.info("抛出一个异常");
             throw new RuntimeException("故意而为之");
         }
+    }
+
+    @StreamListener(RequeueTopic.INPUT)
+    public void consumeRequeueMessage(MessageBean payload) throws InterruptedException {
+        log.info("payload : {}", payload);
+        // 这里重入队列由于重试次数无效了，如果你有重试次数的需求，就只能自己实现了。
+        TimeUnit.SECONDS.sleep(5);
+        log.info("抛出一个异常");
+        throw new RuntimeException("故意而为之");
     }
 }

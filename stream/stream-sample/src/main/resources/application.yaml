@@ -10,6 +10,7 @@ spring:
     port: 5672
     username: guest
     password: guest
+
   cloud:
     stream:
       # 这里是全局配置，也可以按 channel 配置，比如 spring.cloud.stream.bindings.foo.consumer.instance-count
@@ -63,10 +64,19 @@ spring:
             # 最大重试次数
             # 次数等于 1 相当于不重试（消息消费算一次）
             maxAttempts: 2
-        error-producer:
+        errorTopic-producer:
           destination: errorTopic
 
         #～～～～～～～ re-queue 重回队列重试
+        requeue-consumer:
+          destination: requeueTopic
+          group: requeueGroup
+          consumer:
+            # 禁用本地重试功能
+            maxAttempts: 1
+        requeue-producer:
+          destination: requeueTopic
+          group: requeueGroup
 
       # 针对 rabbit 进行配置
       rabbit:
@@ -77,6 +87,11 @@ spring:
               # 是否应该使用延迟消息交换器
               delayedExchange: true
 
+          # 重回队列配置
+          requeue-consumer:
+            consumer:
+              # 重新排队拒绝的消息
+              requeueRejected: true
 
 management:
   endpoints:
