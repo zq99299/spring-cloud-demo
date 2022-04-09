@@ -64,7 +64,7 @@ spring:
             # 最大重试次数
             # 次数等于 1 相当于不重试（消息消费算一次）
             maxAttempts: 2
-        errorTopic-producer:
+        error-producer:
           destination: errorTopic
 
         #～～～～～～～ re-queue 重回队列重试
@@ -77,6 +77,20 @@ spring:
         requeue-producer:
           destination: requeueTopic
           group: requeueGroup
+
+        #～～～～～～～  死信队列例子
+        # 这里指定的是 channel 的名称
+        dlq-consumer:
+          # 绑定到物理的 Exchange 名称
+          destination: dlq-topic
+          group: dlq-group
+          # 本机重试（单机版，并不是把消息发送给 MQ，再重试的）
+          consumer:
+            # 最大重试次数
+            # 次数等于 1 相当于不重试（消息消费算一次）
+            maxAttempts: 2
+        dlq-producer:
+          destination: dlq-topic
 
       # 针对 rabbit 进行配置
       rabbit:
@@ -92,6 +106,12 @@ spring:
             consumer:
               # 重新排队拒绝的消息
               requeueRejected: true
+
+         # 死信队列配置
+          dlq-consumer:
+            consumer:
+              # 自动绑定到 dlq，默认名为 ${topic}.dlq
+              autoBindDlq: true
 
 management:
   endpoints:

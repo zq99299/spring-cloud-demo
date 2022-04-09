@@ -22,6 +22,7 @@ import java.util.concurrent.atomic.AtomicInteger;
         DelayedTopic.class,
         ErrorTopic.class,
         RequeueTopic.class,
+        DlqTopic.class,
 })
 public class StreamConsumer {
     // 监听信道
@@ -68,5 +69,19 @@ public class StreamConsumer {
         TimeUnit.SECONDS.sleep(5);
         log.info("抛出一个异常");
         throw new RuntimeException("故意而为之");
+    }
+
+    // 死信队列
+    @StreamListener(DlqTopic.INPUT)
+    public void consumeDlqMessage(MessageBean payload) throws InterruptedException {
+        log.info("dlq payload : {}", payload);
+        // 重试次数等于 3 的时候，就放行
+        if (count.incrementAndGet() % 3 == 0) {
+            log.info("dlq 消费成功");
+            // count.set(0);
+        } else {
+            log.info("dlq 抛出一个异常");
+            throw new RuntimeException("故意而为之");
+        }
     }
 }

@@ -79,4 +79,16 @@ public class ProducerController {
         requeueTopic.output()
                 .send(MessageBuilder.withPayload(messageBean).build());
     }
+
+    @Autowired
+    private DlqTopic dlqTopic;
+
+    // 死信队列测试
+    @PostMapping("/send-to-dlq")
+    public void sendMessageToDlq(@RequestParam("body") String body) {
+        MessageBean messageBean = new MessageBean();
+        messageBean.setPayload(body);
+        dlqTopic.output()
+                .send(MessageBuilder.withPayload(messageBean).build());
+    }
 }
