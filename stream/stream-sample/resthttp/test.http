@@ -14,3 +14,7 @@ POST http://localhost:63000/send-to-group?body=1
 
 ### 生产者消息发送 - 延迟消息
 POST http://localhost:63000/send-to-delayed?body=1234580看&seconds=5
+
+
+### 生产者消息发送 - 重试，不通过
+POST http://localhost:63000/send-to-error?body=1234580

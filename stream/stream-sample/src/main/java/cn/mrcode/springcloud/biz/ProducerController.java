@@ -1,6 +1,7 @@
 package cn.mrcode.springcloud.biz;
 
 import cn.mrcode.springcloud.topic.DelayedTopic;
+import cn.mrcode.springcloud.topic.ErrorTopic;
 import cn.mrcode.springcloud.topic.GroupTopic;
 import cn.mrcode.springcloud.topic.MyTopic;
 import lombok.extern.slf4j.Slf4j;
@@ -54,5 +55,18 @@ public class ProducerController {
                 .send(MessageBuilder.withPayload(messageBean)
                         .setHeader("x-delay", 1000 * seconds)
                         .build());
+    }
+
+    @Autowired
+    private ErrorTopic errorTopic;
+
+    // 异常重试（单机版）
+    @PostMapping("/send-to-error")
+    public void sendMessageToError(
+            @RequestParam("body") String body) {
+        MessageBean messageBean = new MessageBean();
+        messageBean.setPayload(body);
+        errorTopic.output()
+                .send(MessageBuilder.withPayload(messageBean).build());
     }
 }
