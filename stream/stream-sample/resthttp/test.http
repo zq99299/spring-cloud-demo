@@ -24,3 +24,7 @@ POST http://localhost:63000/send-to-requeue?body=1234580
 
 ### 生产者消息发送 - 死信队列测试
 POST http://localhost:63000/send-to-dlq?body=1234580
+
+
+### 生产者消息发送 - 降级和接口升版
+POST http://localhost:63000/send-to-fallback?body=1234580&version=3.0

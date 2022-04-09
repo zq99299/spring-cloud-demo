@@ -91,4 +91,30 @@ public class ProducerController {
         dlqTopic.output()
                 .send(MessageBuilder.withPayload(messageBean).build());
     }
+
+    @Autowired
+    private FallbackTopic fallbackTopic;
+
+    // 自定义异常处理 fallback + 升版
+    @PostMapping("/send-to-fallback")
+    public void sendMessageToFallback(@RequestParam("body") String body,
+                                      @RequestParam(value = "version",defaultValue = "1.0") String version) {
+        MessageBean messageBean = new MessageBean();
+        messageBean.setPayload(body);
+        // 假设调用下单接口
+        // 不同的 app 可能调用版本不同，
+        // 老的 app 可能还是调用的是：placeOrderV1
+        // 新的 app 可能调用的是最新的 placeOrderV2
+        /*
+          这里有两种方法：
+          1. 发送到不同的队列中
+          2. 传递一个信息
+         */
+
+        fallbackTopic.output()
+                .send(MessageBuilder.withPayload(messageBean)
+                        // 比如这里使用 header 传递
+                        .setHeader("version",version)
+                        .build());
+    }
 }

@@ -92,6 +92,20 @@ spring:
         dlq-producer:
           destination: dlq-topic
 
+        #～～～～～～～  fallback
+        # 这里指定的是 channel 的名称
+        fallback-consumer:
+          # 绑定到物理的 Exchange 名称
+          destination: fallback-topic
+          group: fallback-group
+          # 本机重试（单机版，并不是把消息发送给 MQ，再重试的）
+          consumer:
+            # 最大重试次数
+            # 次数等于 1 相当于不重试（消息消费算一次）
+            maxAttempts: 2
+        fallback-producer:
+          destination: fallback-topic
+
       # 针对 rabbit 进行配置
       rabbit:
         bindings:

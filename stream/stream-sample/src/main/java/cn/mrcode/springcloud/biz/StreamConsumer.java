@@ -5,6 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.cloud.stream.messaging.Sink;
+import org.springframework.integration.annotation.ServiceActivator;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.handler.annotation.Header;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -23,6 +26,7 @@ import java.util.concurrent.atomic.AtomicInteger;
         ErrorTopic.class,
         RequeueTopic.class,
         DlqTopic.class,
+        FallbackTopic.class,
 })
 public class StreamConsumer {
     // 监听信道
@@ -83,5 +87,29 @@ public class StreamConsumer {
             log.info("dlq 抛出一个异常");
             throw new RuntimeException("故意而为之");
         }
+    }
+
+
+    // Fallback + 升级版本
+    @StreamListener(value = FallbackTopic.INPUT)
+    public void consumeFallbackMessage(MessageBean payload,
+                                       @Header("version") String version) {
+        log.info("payload : {}", payload);
+
+        // 这里使用判定的方式，其实在 @StreamListener 中还提供了一个 condition 参数，就可以用来判定 header 中的 version 是否等于某个值
+        if ("1.0".equals(version)) {
+            log.info("消费成功");
+        } else if ("2.0".equals(version)) {
+            log.info("版本不支持");
+            throw new RuntimeException("版本不支持");
+        } else {
+            log.info("消费成功,version={}", version);
+        }
+    }
+
+    // inputChannel 命名： {destination}.{group}.errors
+    @ServiceActivator(inputChannel = "fallback-topic.fallback-group.errors")
+    public void fallback(Message<?> message){
+        log.info("fallback entered");
     }
 }
