@@ -19,7 +19,7 @@ public class SentinelClientApplication {
         // 这里为了方便记录，使用手动编码方式将参数放置到系统参数中
         Properties properties = System.getProperties();
         // 控制台地址
-        properties.put("csp.sentinel.dashboard.server", "127.0.0.1:8080");
+        properties.put("csp.sentinel.dashboard.server", "127.0.0.1:9000");
         // 应用名称
         properties.put("project.name", "sentinel-client");
         SpringApplication.run(SentinelClientApplication.class, args);

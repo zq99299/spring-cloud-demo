@@ -10,3 +10,7 @@ GET http://localhost:8000/anno/flow
 
 ### 注解流控+降级
 GET http://localhost:8000/anno/fallback?timeout=0
+
+
+### 流控测试
+GET http://localhost:8000/apollo/anno/flow

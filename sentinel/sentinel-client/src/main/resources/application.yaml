@@ -4,3 +4,10 @@ server:
 spring:
   application:
     name: sentinel-client
+
+# apollo 配置
+
+## 应用 ID，对应的是 apollo 上的应用 ID
+app.id: sentinel-apollo
+## apollo 的 config-server 信息
+apollo.meta: http://localhost:8080
