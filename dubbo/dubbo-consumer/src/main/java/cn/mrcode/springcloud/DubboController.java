@@ -17,7 +17,7 @@ public class DubboController {
     //  @Reference 注解中有很多的属性
     @Reference(
             // 指定均衡负载类型
-            loadbalance = "roundrobin"
+            loadbalance = "random"
     )
     private IDubboService iDubboService;
 

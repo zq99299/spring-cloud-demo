@@ -22,7 +22,7 @@ dubbo:
     name: dubbo
     # dubbo 协议默认端口为 20880， rmi 协议默认端口为 1099
     # http 和 hessian 协议默认端口为 80
-    port: 20880
+    port: 20881
   # 元数据中心：后续讲解
   metadata-report:
     address: zookeeper://127.0.0.1:2181
@@ -30,4 +30,6 @@ dubbo:
   monitor:
     # 用于配置链接监控中心相关信息，可选
     protocol: register
+  config-center:
+    address:  zookeeper://127.0.0.1:2181
 
