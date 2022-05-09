@@ -1,0 +1,2 @@
+### 商品发布
+POST http://localhost:63002/publish?name=测试商品

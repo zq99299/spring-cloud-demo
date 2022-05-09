@@ -35,6 +35,9 @@
         <module>sleuth/sleuth-traceB</module>
         <module>sleuth/zipkin-server</module>
         <module>stream/stream-sample</module>
+        <module>dubbo/dubbo-api</module>
+        <module>dubbo/dubbo-provider</module>
+        <module>dubbo/dubbo-consumer</module>
     </modules>
 
     <!-- 管理依赖的 JAR 版本-->

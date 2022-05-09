@@ -1,0 +1,32 @@
+server:
+  port: 63001
+
+spring:
+  application:
+    name: dubbo-provider
+
+# dubbo 极简配置，这里挑选几个比较重要的来配置
+dubbo:
+  application:
+    name: dubbo-provider
+  # 注册中心
+  registry:
+    protocol: zookeeper
+    address: zookeeper://127.0.0.1:2181
+    # 启动时检查是否存在，注册中心不存在就报错
+    check: false
+  # 协议配置
+  protocol:
+    # name 必须，指定协议类型
+    name: dubbo
+    # dubbo 协议默认端口为 20880， rmi 协议默认端口为 1099
+    # http 和 hessian 协议默认端口为 80
+    port: 20880
+  # 元数据中心：后续讲解
+  metadata-report:
+    address: zookeeper://127.0.0.1:2181
+  # 监控中心：后续讲解
+  monitor:
+    # 用于配置链接监控中心相关信息，可选
+    protocol: register
+
